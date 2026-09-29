@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoodLens · AI 情绪日记</title>
+<meta name="description" content="浏览器端 AI 情绪分析日记：写下今天，AI 实时读懂你的情绪，本地存储、不上传任何文字。">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">MoodLens</span>
+    <span class="sub">AI 情绪日记 · 所有文字只存于你的浏览器</span>
+  </div>
+  <div class="model-badge" id="modelBadge">AI 模型加载中…</div>
+</header>
+
+<main class="layout">
+  <section class="pane writer">
+    <h2>写下此刻</h2>
+    <p class="hint">今天发生了什么？此刻你的感受是……（支持中文 / English，越具体越准）</p>
+    <textarea id="entryInput" placeholder="例如：项目终于上线了，但突然又接到一堆改动，又累又有点开心……"></textarea>
+    <div class="actions">
+      <button id="analyzeBtn" class="btn primary">✨ AI 情绪分析</button>
+      <button id="saveBtn" class="btn" disabled>保存日记</button>
+    </div>
+    <div id="resultBox" class="result hidden">
+      <div class="result-head">
+        <span id="emotionTag" class="emotion-tag">—</span>
+        <span id="confidence" class="confidence"></span>
+      </div>
+      <p id="reflection" class="reflection"></p>
+    </div>
+  </section>
+
+  <section class="pane dashboard">
+    <div class="stats">
+      <div class="stat"><div class="stat-num" id="statCount">0</div><div class="stat-label">日记数</div></div>
+      <div class="stat"><div class="stat-num" id="statMood">—</div><div class="stat-label">主导情绪</div></div>
+      <div class="stat"><div class="stat-num" id="statStreak">0</div><div class="stat-label">连续天数</div></div>
+    </div>
+    <h3>情绪趋势</h3>
+    <div id="trendChart" class="chart"></div>
+    <h3>情绪分布</h3>
+    <div id="distChart" class="chart"></div>
+  </section>
+</main>
+
+<section class="pane history">
+  <div class="history-head">
+    <h2>我的日记</h2>
+    <div class="history-actions">
+      <button id="exportBtn" class="btn ghost">导出</button>
+      <button id="importBtn" class="btn ghost">导入</button>
+      <button id="clearBtn" class="btn ghost danger">清空</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+  </div>
+  <ul id="entryList" class="entry-list"></ul>
+  <p id="emptyHint" class="empty-hint">还没有记录，写下第一条吧 ✍️</p>
+</section>
+
+<footer class="foot">
+  <p>MoodLens 通过 transformers.js 在你的浏览器本地运行真实神经网络（DistilBERT 多语言情感模型），<b>不联网推理、不上传任何文字</b>。</p>
+  <p>模型经 hf-mirror.com 镜像加载，首次加载需下载约数十 MB，之后走浏览器缓存。</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

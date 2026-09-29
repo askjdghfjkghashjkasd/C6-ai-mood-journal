@@ -1,0 +1,10 @@
+{
+  "name": "moodlens-ai-mood-journal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MoodLens · AI 情绪日记：浏览器端 AI 情绪分析 Web 产品（真实可运行，无后端）",
+  "scripts": {
+    "start": "python3 -m http.server 8000"
+  }
+}
